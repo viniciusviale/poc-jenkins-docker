@@ -1,0 +1,11 @@
+structs
+bouncycastle-api
+config-file-provider
+credentials
+ssh-credentials
+ssh-slaves
+jclouds-jenkins
+token-macro
+durable-task
+docker-plugin
+

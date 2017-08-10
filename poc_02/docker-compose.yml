@@ -1,4 +1,5 @@
-ld: jenkins-data
+data:
+  build: jenkins-data
 
 master:
   build: jenkins-master
