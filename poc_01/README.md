@@ -13,4 +13,4 @@ Putting Jenkins in a Docker Container
   - docker-compose stop: stop running docker containers.
   - docker-compose start: start docker containers.
   - docker-compose down: stop and remove containers.
-- After start, point your browser to: http://<yourdockerhostip>  
+- After start, point your browser to: http://yourdockerhostip  
