@@ -17,4 +17,5 @@ Putting Jenkins in a Docker Container
   - docker-compose up -d: start new docker containers.
   - docker-compose stop: stop running docker containers.
   - docker-compose start: start docker containers.
+  - docker-compose down: stop and remove containers.
   
