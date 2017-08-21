@@ -1,0 +1,2 @@
+# Preserve Unix line endings on those files (used inside the Linux VM)
+jenkins/plugins.txt text eol=lf
