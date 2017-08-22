@@ -1,2 +1,3 @@
 # Preserve Unix line endings on those files (used inside the Linux VM)
-jenkins/plugins.txt text eol=lf
+jenkins-master/plugins.txt text eol=lf
+docker/daemon.json text eol=lf

@@ -1,0 +1,18 @@
+---
+
+- hosts: all
+  sudo: yes
+  roles:
+    - jgeusebroek.docker
+    - franklinkim.docker-compose
+  vars:
+    docker_compose_version: 1.15.0
+  tags: ["docker"]
+  tasks:
+    - name: Docker Copy docker.service.d configuration file
+      copy: src=conf/override.conf
+            dest=/etc/systemd/system/docker.service.d/override.conf
+            owner=root group=root mode=0644
+
+    - name: Add the user 'ubuntu' to the group 'docker'
+      user: name=ubuntu shell=/bin/bash groups=docker append=yes
