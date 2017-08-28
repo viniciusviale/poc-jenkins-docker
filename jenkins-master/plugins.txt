@@ -5,6 +5,6 @@ docker-plugin:0.16.2
 durable-task:1.14
 jclouds-jenkins:2.14
 ssh-credentials:1.13
-ssh-slaves:1.20
+ssh-slaves:1.21
 structs:1.10
 token-macro:2.1

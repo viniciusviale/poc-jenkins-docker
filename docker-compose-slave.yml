@@ -1,0 +1,2 @@
+slave:
+  build: jenkins-slave

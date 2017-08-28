@@ -14,6 +14,3 @@ nginx:
     - "80:80"
   links:
     - master:jenkins-master
-
-slave:
-  build: jenkins-slave

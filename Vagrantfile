@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
       v.memory = 2048
       v.cpus = 2
     end
-     
+
     config.vm.provision "ansible_local" do |ansible|
         ansible.galaxy_role_file = "docker/requirements.yml"
         ansible.galaxy_roles_path = "docker/roles" 

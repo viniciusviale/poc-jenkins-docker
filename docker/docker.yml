@@ -3,16 +3,49 @@
 - hosts: all
   sudo: yes
   roles:
-    - jgeusebroek.docker
+    - { role: jgeusebroek.docker,
+        docker_opts: "-H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375"
+      }
     - franklinkim.docker-compose
   vars:
     docker_compose_version: 1.15.0
   tags: ["docker"]
   tasks:
-    - name: Docker Copy docker.service.d configuration file
-      copy: src=conf/override.conf
-            dest=/etc/systemd/system/docker.service.d/override.conf
-            owner=root group=root mode=0644
-
     - name: Add the user 'ubuntu' to the group 'docker'
       user: name=ubuntu shell=/bin/bash groups=docker append=yes
+
+    - name: Clean private key files path
+      file:
+        state: absent
+        path: /vagrant/jenkins-slave/files/
+
+    - name: Create private key files path 
+      file:
+        path: /vagrant/jenkins-slave/files/
+        state: directory
+        mode: 0755
+
+    - name: Generate SSH keys
+      shell: ssh-keygen -t rsa -b 4096 -f /vagrant/jenkins-slave/files/id_rsa -q -N ""
+      args:
+        creates: /vagrant/jenkins-slave/files/id_rsa
+
+    - name: Rename id_rsa.pub
+      command: mv /vagrant/jenkins-slave/files/id_rsa.pub /vagrant/jenkins-slave/files/authorized_keys
+
+    - name: Build Jenkins master docker-compose file
+      command: docker-compose -p jenkins -f docker-compose-master.yml build
+      args:
+        chdir: /vagrant
+
+    - name: Build Jenkins slave docker-compose file
+      command: docker-compose -p jenkins -f docker-compose-slave.yml build
+      args:
+        chdir: /vagrant
+
+    - meta: flush_handlers
+
+    - name: Run docker-compose file
+      command: docker-compose -p jenkins -f docker-compose-master.yml up -d
+      args:
+        chdir: /vagrant

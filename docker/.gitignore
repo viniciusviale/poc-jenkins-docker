@@ -1,2 +1,6 @@
 # Ansible roles #
 roles
+
+# OS generated files #
+.vagrant
+*.retry
