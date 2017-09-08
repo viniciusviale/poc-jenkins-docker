@@ -33,6 +33,9 @@
     - name: Rename id_rsa.pub
       command: mv /vagrant/jenkins-slave/files/id_rsa.pub /vagrant/jenkins-slave/files/authorized_keys
 
+    - name: Init the host as a swarm manager
+      command: docker swarm init
+
     - name: Build Jenkins master docker-compose file
       command: docker-compose -p jenkins -f docker-compose-master.yml build
       args:
@@ -45,7 +48,13 @@
 
     - meta: flush_handlers
 
-    - name: Run docker-compose file
-      command: docker-compose -p jenkins -f docker-compose-master.yml up -d
+    - name: Add 
+      command: sudo chown 1000 /var/log/jenkins
+
+    - name: Add 
+      command: sudo chown 1000 /var/jenkins_home  
+
+    - name: Run Docker stack deploy file
+      command: docker stack deploy -c docker-stack.yml jenkins-swarm
       args:
         chdir: /vagrant

@@ -1,13 +1,11 @@
-data:
-  build: jenkins-data
-
 master:
   build: jenkins-master
-  volumes_from:
-    - data
+  volumes:
+      - /var/log/jenkins:/var/log/jenkins
+      - /var/jenkins_home:/var/jenkins_home
   ports:
     - "50000:50000"
-
+  
 nginx:
   build: jenkins-nginx
   ports:

@@ -6,6 +6,7 @@ Vagrant.configure("2") do |config|
 
     # Add forwarded ports docker-compose
     config.vm.network "forwarded_port", guest: 80, host: 80
+    config.vm.network "forwarded_port", guest: 8080, host: 8080
     config.vm.network "forwarded_port", guest: 50000, host: 50000
 
     config.vm.synced_folder ".", "/vagrant", disabled: false
